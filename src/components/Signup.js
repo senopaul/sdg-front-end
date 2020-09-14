@@ -57,11 +57,11 @@ function Signup() {
               </p>
               <Form.Group controlId="formBasicEmail">
                 <Form.Label>Name</Form.Label>
-                <Form.Control type="text" className="form-input" />
+                <Form.Control type="text" className="form-input" required />
               </Form.Group>
               <Form.Group controlId="formBasicEmail">
                 <Form.Label>Email </Form.Label>
-                <Form.Control type="email" className="form-input" />
+                <Form.Control type="email" className="form-input" required />
               </Form.Group>
 
               <Form.Group controlId="formBasicPassword">
@@ -70,7 +70,7 @@ function Signup() {
               </Form.Group>
               <Form.Group controlId="formBasicPassword">
                 <Form.Label>Comfirm Password</Form.Label>
-                <Form.Control type="password" className="form-input" />
+                <Form.Control type="password" className="form-input" required />
               </Form.Group>
 
               <button type="submit" className="button">

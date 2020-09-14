@@ -56,12 +56,12 @@ function Login() {
               
               <Form.Group controlId="formBasicEmail">
                 <Form.Label>Email </Form.Label>
-                <Form.Control type="email" className="form-input" />
+                <Form.Control type="email" className="form-input" required/>
               </Form.Group>
 
               <Form.Group controlId="formBasicPassword">
                 <Form.Label>Password</Form.Label>
-                <Form.Control type="password" className="form-input" />
+                <Form.Control type="password" className="form-input" required/>
               </Form.Group>
              <p className="forgot-password">Forgot Password?</p>
 
