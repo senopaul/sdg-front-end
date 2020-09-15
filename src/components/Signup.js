@@ -25,7 +25,7 @@ function Signup() {
           <Nav>
             <Nav.Link href="#">HELP & CONTACT</Nav.Link>
             <Nav.Link href="#">FAQ</Nav.Link>
-            <Nav.Link href="#">JOIN | SIGN IN</Nav.Link>
+            <Nav.Link href="/login">SIGN IN</Nav.Link>
             <Nav.Link>
               <button type="submit" className="sell-button">
                 SELL
