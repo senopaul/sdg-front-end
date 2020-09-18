@@ -7,7 +7,7 @@ import "../login.css";
 
 export default class LinkSuccessful extends Component {
   state = {
-    email: "",
+    email: [""],
     
   };
 
@@ -29,6 +29,7 @@ export default class LinkSuccessful extends Component {
         },
         (error) => {
           console.log(error);
+          alert("failed")
         }
       );
   };

@@ -5,10 +5,17 @@ import Form from "react-bootstrap/Form";
 import axios from "axios";
 import "../login.css";
 
+const validEmailRegex = RegExp(
+  /^(([^<>()\\[\]\\.,;:\s@\\"]+(\.[^<>()\\[\]\\.,;:\s@\\"]+)*)|(\\".+\\"))@(([^<>()[\]\\.,;:\s@\\"]+\.)+[^<>()[\]\\.,;:\s@\\"]{2,})$/i
+);
 export default class Login extends Component {
   state = {
     email: "",
     password: "",
+    errors: {
+      email: "",
+      password: "",
+    },
   };
 
   handleChange = (event) => {
@@ -17,6 +24,8 @@ export default class Login extends Component {
       email: this.state.email,
       password: this.state.password,
     };
+
+   
     axios
       .post("https://openmarketauth.herokuapp.com/api/v1/auth/login", user)
       .then(
@@ -30,13 +39,48 @@ export default class Login extends Component {
       );
   };
   emailChange = (event) => {
+     const { name, value } = event.target;
+     let errors = this.state.errors;
+     switch (name) {
+       
+       case "email":
+         errors.email = validEmailRegex.test(value)
+           ? ""
+           : "Email Should be of a proper email format and it is required!";
+         break;
+       default:
+         break;
+     }
+
+     this.setState({ errors, [name]: value }, () => {
+       // console.log(errors);
+       this.setState({ errors, [name]: value });
+     });
     this.setState({ email: event.target.value });
+
   };
   passwordChange = (event) => {
+     const { name, value } = event.target;
+     let errors = this.state.errors;
+     switch (name) {
+       case "password":
+         errors.password =
+           value.length < 8
+             ? "Password must be 6 characters long and contain numbers e.g 123 and it is required!"
+             : "";
+         break;
+       default:
+         break;
+     }
+     this.setState({ errors, [name]: value }, () => {
+       this.setState({ errors, [name]: value });
+     });
     this.setState({ password: event.target.value });
   };
 
   render() {
+    const { errors } = this.state;
+
     let url = "/";
     return (
       <div>
@@ -94,15 +138,17 @@ export default class Login extends Component {
                     onChange={this.emailChange}
                     required={true}
                   />
-                  {/* <small
-                  style={{
-                    color: "red",
-                    marginLeft: "15px",
-                    fontSize: "0.75rem",
-                  }}
-                >
-                  {emaile}
-                </small> */}
+                  {errors.email.length > 0 && (
+                    <span
+                      style={{
+                        color: "red",
+                        // marginLeft: "15px",
+                        fontSize: "0.75rem",
+                      }}
+                    >
+                      {errors.email}
+                    </span>
+                  )}
                 </Form.Group>
 
                 <Form.Group controlId="formBasicPassword">
@@ -115,16 +161,18 @@ export default class Login extends Component {
                     onChange={this.passwordChange}
                     required={true}
                   />
+                  {errors.password.length > 0 && (
+                    <span
+                      style={{
+                        color: "red",
+                        // marginLeft: "15px",
+                        fontSize: "0.75rem",
+                      }}
+                    >
+                      {errors.password}
+                    </span>
+                  )}
 
-                  {/* <small
-                  style={{
-                    color: "red",
-                    marginLeft: "15px",
-                    fontSize: "0.75rem",
-                  }}
-                >
-                  {passworde}
-                </small> */}
                 </Form.Group>
                 <p className="forgot-password">
                   {" "}
