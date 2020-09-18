@@ -25,7 +25,6 @@ export default class Login extends Component {
       password: this.state.password,
     };
 
-   
     axios
       .post("https://openmarketauth.herokuapp.com/api/v1/auth/login", user)
       .then(
@@ -39,42 +38,40 @@ export default class Login extends Component {
       );
   };
   emailChange = (event) => {
-     const { name, value } = event.target;
-     let errors = this.state.errors;
-     switch (name) {
-       
-       case "email":
-         errors.email = validEmailRegex.test(value)
-           ? ""
-           : "Email Should be of a proper email format and it is required!";
-         break;
-       default:
-         break;
-     }
+    const { name, value } = event.target;
+    let errors = this.state.errors;
+    switch (name) {
+      case "email":
+        errors.email = validEmailRegex.test(value)
+          ? ""
+          : "Email Should be of a proper email format and it is required!";
+        break;
+      default:
+        break;
+    }
 
-     this.setState({ errors, [name]: value }, () => {
-       // console.log(errors);
-       this.setState({ errors, [name]: value });
-     });
+    this.setState({ errors, [name]: value }, () => {
+      // console.log(errors);
+      this.setState({ errors, [name]: value });
+    });
     this.setState({ email: event.target.value });
-
   };
   passwordChange = (event) => {
-     const { name, value } = event.target;
-     let errors = this.state.errors;
-     switch (name) {
-       case "password":
-         errors.password =
-           value.length < 8
-             ? "Password must be 6 characters long and contain numbers e.g 123 and it is required!"
-             : "";
-         break;
-       default:
-         break;
-     }
-     this.setState({ errors, [name]: value }, () => {
-       this.setState({ errors, [name]: value });
-     });
+    const { name, value } = event.target;
+    let errors = this.state.errors;
+    switch (name) {
+      case "password":
+        errors.password =
+          value.length < 8
+            ? "Password must be 6 characters long and contain numbers e.g 123 and it is required!"
+            : "";
+        break;
+      default:
+        break;
+    }
+    this.setState({ errors, [name]: value }, () => {
+      this.setState({ errors, [name]: value });
+    });
     this.setState({ password: event.target.value });
   };
 
@@ -172,7 +169,6 @@ export default class Login extends Component {
                       {errors.password}
                     </span>
                   )}
-
                 </Form.Group>
                 <p className="forgot-password">
                   {" "}
